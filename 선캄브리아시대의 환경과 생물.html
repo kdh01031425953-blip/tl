@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>선캄브리아시대의 환경과 생물</title>
+<style>
+:root{--bg:#0b1220;--fg:#e8eefc;--card:#141d33;--mut:#9fb0d0;--sea:#3aa0ff;--land:#7bc043;--ac:#ffb347;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#f4f7fc;--fg:#10203a;--card:#fff;--mut:#51628a}}
+:root[data-theme=dark]{--bg:#0b1220;--fg:#e8eefc;--card:#141d33;--mut:#9fb0d0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+header{text-align:center;padding:28px 16px 8px}h1{margin:0;font-size:clamp(24px,6vw,40px)}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.stats div{background:var(--card);border-radius:14px;padding:8px 16px;font-size:13px;color:var(--mut)}.stats b{display:block;font-size:26px;color:var(--ac)}
+nav{display:flex;gap:8px;justify-content:center;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px;z-index:5}
+nav button,.rp,.sb{border:0;border-radius:20px;padding:8px 18px;background:var(--card);color:var(--fg);font:inherit;cursor:pointer}
+nav button.a,.sb.a{background:var(--ac);color:#111;font-weight:700}
+.rp{font-size:12px;padding:3px 10px;float:right}
+main{max-width:900px;margin:auto;padding:0 12px 30px}.tab{display:none}.tab.a{display:block}
+.card{background:var(--card);border-radius:18px;padding:14px;margin:14px 0}
+h2{margin:0 0 6px;font-size:18px}.card p{margin:4px 0;color:var(--mut);font-size:14px}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--fg);font-size:11px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+[data-name],[data-info]{cursor:pointer}
+#tip{position:fixed;pointer-events:none;background:#000c;color:#fff;padding:3px 9px;border-radius:8px;font-size:13px;display:none;z-index:20}
+#pop{position:fixed;left:10px;right:10px;bottom:10px;max-width:520px;margin:auto;background:var(--ac);color:#111;padding:12px 16px;border-radius:14px;display:none;z-index:20;font-size:14px}
+.sea{border-left:5px solid var(--sea)}.land{border-left:5px solid var(--land)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.an{background:var(--card);border-radius:16px;padding:10px;cursor:pointer;transition:.3s}.an .d{display:none;font-size:14px;color:var(--mut)}
+.an.open{grid-column:1/-1;transform:scale(1.01);box-shadow:0 0 0 2px var(--ac)}.an.open .d{display:block}.an svg{max-height:90px}.an.open svg{max-height:150px}
+.tag{font-size:11px;border-radius:10px;padding:1px 8px;color:#111}.tag.s{background:var(--sea)}.tag.l{background:var(--land)}
+.cond{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}.cond div{background:#ffffff12;border-radius:12px;padding:8px;font-size:13px}.cond b{color:var(--ac)}
+footer{text-align:center;font-size:12px;color:var(--mut);padding:20px 14px}footer a{color:var(--ac)}
+/* animations */
+.dr{stroke-dasharray:1;stroke-dashoffset:1}.on .dr{stroke-dashoffset:0;transition:stroke-dashoffset 3.5s ease}
+.v .arc{stroke-dasharray:0 100;transition:stroke-dasharray 3s}.on .arc{stroke-dasharray:88.2 100}
+.hand{transform-origin:100px 100px;transform:rotate(0);transition:transform 3s}.on .hand{transform:rotate(317.5deg)}
+.prog{transform-origin:20px 0;transform:scaleX(0);transition:transform 5s linear}.on .prog{transform:scaleX(1)}
+.ob{transform-origin:bottom;transform-box:fill-box;transform:scaleY(.03)}.on .ob{animation:ox 5s forwards}
+@keyframes ox{0%{transform:scaleY(.03)}45%{transform:scaleY(.06)}60%{transform:scaleY(.3)}100%{transform:scaleY(1)}}
+.on .tg{animation:fl 5s forwards}.tg{opacity:0}@keyframes fl{0%,40%{opacity:0}55%,100%{opacity:1}}
+.b{animation:rise 3s infinite}@keyframes rise{from{transform:translateY(0);opacity:1}to{transform:translateY(-70px);opacity:0}}
+#oc[data-s="1"] .w{fill:#2e8f8a}#oc[data-s="2"] .w{fill:#2a7bd0}#oc[data-s="3"] .w{fill:#8fd0f0}
+.w{transition:.8s}#oc[data-s="3"] .wl{transform:translateY(22px)}.wl{transition:.8s}
+.fe{transition:.8s}#oc[data-s="2"] .fe{opacity:.35}#oc[data-s="3"] .fe{opacity:.1}
+.ox{opacity:0;transition:.8s}#oc[data-s="2"] .ox,#oc[data-s="3"] .ox{opacity:1}
+.ice{opacity:0;transition:.8s}#oc[data-s="3"] .ice{opacity:1}
+.th{transition:.8s;transform-box:fill-box;transform-origin:bottom}#oc[data-s="1"] .th{transform:scaleY(.9)}#oc[data-s="2"] .th{transform:scaleY(.55)}#oc[data-s="3"] .th{transform:scaleY(.2)}
+.k{animation:drift 14s ease-in-out infinite}.k2{animation-name:d2}.k3{animation-name:d3}.k4{animation-name:d4}
+@keyframes drift{0%,100%{transform:translate(-70px,-45px)}45%,55%{transform:none}}
+@keyframes d2{0%,100%{transform:translate(70px,-45px)}45%,55%{transform:none}}
+@keyframes d3{0%,100%{transform:translate(-70px,45px)}45%,55%{transform:none}}
+@keyframes d4{0%,100%{transform:translate(70px,45px)}45%,55%{transform:none}}
+.rod{animation:rl 14s infinite}@keyframes rl{0%,35%,65%,100%{opacity:0}45%,55%{opacity:1}}
+.lv{animation:lava 1.6s infinite}.lv:nth-child(2){animation-delay:.5s}.lv:nth-child(3){animation-delay:1s}
+@keyframes lava{from{transform:translate(0,0);opacity:1}to{transform:translate(var(--x,10px),-60px);opacity:0}}
+.sw{animation:sw 4s ease-in-out infinite}@keyframes sw{50%{transform:translateX(8px)}}
+.pl{animation:pu 2s infinite}@keyframes pu{50%{opacity:.4}}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="cy" viewBox="0 0 100 40"><g fill="#2fb59a" stroke="#0e6b5a" stroke-width="1.5"><ellipse cx="14" cy="20" rx="11" ry="9"/><ellipse cx="34" cy="20" rx="11" ry="9"/><ellipse cx="54" cy="20" rx="11" ry="9"/><ellipse cx="74" cy="20" rx="11" ry="9"/><ellipse cx="92" cy="20" rx="8" ry="8"/></g><g fill="#0e6b5a"><circle cx="14" cy="20" r="2"/><circle cx="34" cy="20" r="2"/><circle cx="54" cy="20" r="2"/><circle cx="74" cy="20" r="2"/></g></symbol>
+<symbol id="ich" viewBox="0 0 140 62"><g stroke="#6b7a2a" stroke-width="5" stroke-linecap="round"><path d="M42 38L34 56M74 38L84 56M52 24L46 8M80 24L88 8" fill="none"/></g><ellipse cx="62" cy="30" rx="44" ry="14" fill="#8a9a3a"/><ellipse cx="17" cy="30" rx="16" ry="11" fill="#9aab45"/><circle cx="12" cy="26" r="2.5" fill="#111"/><path d="M104 30Q124 12 138 30Q124 48 104 30Z" fill="#c8b24a" stroke="#6b7a2a"/></symbol>
+<symbol id="din" viewBox="0 0 100 60"><ellipse cx="50" cy="30" rx="46" ry="24" fill="#d9a066" stroke="#8a5a2a" stroke-width="2"/><g stroke="#8a5a2a" stroke-width="2"><path d="M14 15V45M24 10V50M34 7.5V52.5M44 6V54M56 6V54M66 7.5V52.5M76 10V50M86 15V45M50 6V54"/></g></symbol>
+<symbol id="cha" viewBox="0 0 60 100"><path d="M30 98V40" stroke="#7a4a8a" stroke-width="4"/><ellipse cx="30" cy="38" rx="15" ry="34" fill="#b57fc8" stroke="#6a3a7a" stroke-width="2"/><g stroke="#6a3a7a" stroke-width="2"><path d="M30 60L18 52M30 60L42 52M30 46L18 38M30 46L42 38M30 32L19 24M30 32L41 24M30 18L22 12M30 18L38 12"/></g></symbol>
+</defs></svg>
+<header><h1>선캄브리아시대의 환경과 생물</h1>
+<div class="stats"><div><b data-c="46" data-u="억 년 전">0</b>시작</div><div><b data-c="88.2" data-d="1" data-u="%">0</b>전체 지질 시대 비율</div><div><b data-c="2" data-u="번">0</b>빙하기</div></div></header>
+<nav><button class="a" data-t="env">🌍 환경</button><button data-t="bio">🧬 생물</button><button data-t="fos">🦴 화석</button></nav>
+<main>
+<!-- ENV -->
+<section class="tab a" id="env">
+<div class="card v"><button class="rp">▶ 다시</button><h2>① 시대 구분 · 24시간 시계</h2>
+<div class="row"><svg viewBox="0 0 200 200" data-info="46억 년을 24시간으로 줄이면 선캄브리아시대는 0시부터 약 21시 10분까지(약 88.2%)입니다."><circle cx="100" cy="100" r="80" fill="none" stroke="#ffffff22" stroke-width="18"/><circle class="arc" cx="100" cy="100" r="80" pathLength="100" fill="none" stroke="#ffb347" stroke-width="18" transform="rotate(-90 100 100)" data-name="선캄브리아시대 약 88.2%"/><g class="hand"><line x1="100" y1="100" x2="100" y2="30" stroke="var(--fg)" stroke-width="3" stroke-linecap="round"/></g><circle cx="100" cy="100" r="5" fill="var(--fg)"/><text x="100" y="14" text-anchor="middle">0시 (46억 년 전)</text><text x="100" y="196" text-anchor="middle">12시</text><text x="100" y="94" text-anchor="middle" style="font-size:12px;font-weight:700"> </text></svg>
+<div><p>약 46억 년 전에 시작해서 5억 4000만 년 전에 끝났다.</p><p>전체 지질 시대의 약 88.2%를 차지한다. (24시간 시계로는 약 21시 10분까지)</p><p>화석이 희귀하기 때문에 생물 화석 대신 <b>절대연령 측정</b>, <b>대기 성분 변화</b>, <b>지구 역사적 대사건</b>을 기준으로 세부 단계를 나눈다.</p></div></div>
+<svg viewBox="0 0 640 110" style="margin-top:8px"><rect x="20" y="40" width="529" height="22" rx="6" fill="#ffb34755"/><rect x="549" y="40" width="71" height="22" rx="6" fill="#7bc04388"/><rect class="prog" x="20" y="40" width="529" height="22" rx="6" fill="#ffb347"/>
+<text x="285" y="56" text-anchor="middle" style="fill:#111;font-weight:700">선캄브리아시대 (46억 ~ 5.4억 년 전)</text><text x="585" y="78" text-anchor="middle">고생대~</text>
+<rect x="307" y="36" width="39" height="30" fill="#8fd0f0" opacity=".85" data-name="휴로니 빙하기 (24억~21억 년 전)"/><rect x="526" y="36" width="11" height="30" fill="#8fd0f0" data-name="크리오스진기 빙하기 (7.2억~6.35억 년 전)"/><rect x="490" y="68" width="39" height="8" fill="#c08be0" data-name="로디니아 초대륙 (10억~7억 년 전)"/>
+<text x="326" y="30" text-anchor="middle">휴로니 빙하기</text><text x="500" y="92" text-anchor="middle">로디니아</text><text x="540" y="30" text-anchor="middle">크리오스진기</text><text x="20" y="30">46억</text></svg></div>
+
+<div class="card v"><button class="rp">▶ 다시</button><h2>② 기후 · 기온 변화 (모식도)</h2>
+<svg viewBox="0 0 680 190" data-info="전반적으로 온난했지만 대기 변화로 말기에 대규모 빙하기. 빙하 퇴적물이 근거."><rect x="376" y="20" width="46" height="130" fill="#8fd0f044"/><rect x="632" y="20" width="14" height="130" fill="#8fd0f044"/><path d="M40 150H660M40 20V150" stroke="var(--mut)" fill="none"/><path class="dr" pathLength="1" d="M40 70L360 70L376 140L422 140L440 70L615 70L632 150L646 150L660 75" fill="none" stroke="#ff6b4a" stroke-width="3.5" stroke-linejoin="round"/>
+<text x="399" y="14" text-anchor="middle">휴로니 빙하기</text><text x="399" y="165" text-anchor="middle">약 24억~21억 년 전</text><text x="600" y="14" text-anchor="middle">크리오스진기 빙하기</text><text x="590" y="178" text-anchor="middle">약 7.2억~6.35억 년 전</text><text x="44" y="62">온난</text><text x="44" y="164">한랭</text><text x="40" y="186">← 46억 년 전          시간          5.4억 년 전 →</text></svg>
+<p>전반적으로 온난했지만 대기 변화로 말기에 대규모 빙하기를 겪었다. 빙하 퇴적물이 근거.</p><p>빙하기: <b>2번</b> — 휴로니 빙하기, 크리오스진기 빙하기</p></div>
+
+<div class="card v"><button class="rp">▶ 다시</button><h2>③ 대기·해양 환경</h2>
+<div class="row"><div><svg viewBox="0 0 300 200" data-info="산소는 처음엔 0에 가깝다가 남세균 광합성으로 생성, 해양의 산소 소비 물질이 포화되며 약 24억 년 전 대산소화 사건을 거쳐 크게 증가."><text x="10" y="14">대기 중 산소 (O₂)</text><rect x="20" y="24" width="50" height="160" rx="6" fill="none" stroke="var(--mut)"/><rect class="ob" x="22" y="26" width="46" height="156" rx="4" fill="#5ee0a0" data-name="산소 농도"/><text x="26" y="196">거의 0 → 크게 증가</text><g class="tg"><text x="80" y="110" style="fill:#5ee0a0;font-weight:700">대산소화 사건</text><text x="80" y="124">(약 24억 년 전)</text></g><path d="M150 34C170 40 180 60 190 90S230 150 290 160" class="dr" pathLength="1" fill="none" stroke="#c0c0c0" stroke-width="3" transform="translate(0,50)"/><text x="150" y="40" data-name="CO₂ 농도">CO₂ 높음</text><text x="240" y="205" style="font-size:10px"> </text></svg>
+<p>처음엔 거의 0 → 남세균 등의 광합성으로 산소 생성 → 해양의 산소 소비 물질 포화 → 약 24억 년 전 대산소화 사건 후 크게 증가.</p><p>초기의 높은 CO₂가 점차 감소 (광합성 생물 증가·암석 풍화). 온실효과가 약해져 냉각·빙하기 형성에 영향.</p></div>
+<div><svg id="oc" data-s="1" viewBox="0 0 320 190"><rect width="320" height="190" fill="#1a2a4a"/><rect x="0" y="40" width="70" height="150" fill="#8a6a4a"/><path class="ice" d="M0 30H70V50H0Z" fill="#fff" data-name="빙하"/><g class="wl"><rect class="w" x="70" y="50" width="250" height="140" data-name="바다" data-info="초기: 비교적 따뜻하고 산소 부족, 철이 많이 녹아 있음. 후반: 빙하기로 해수면·수온이 크게 변동."/><g class="fe" fill="#e07a3a"><circle cx="110" cy="100" r="4"/><circle cx="170" cy="130" r="4"/><circle cx="230" cy="90" r="4"/><circle cx="260" cy="150" r="4"/><circle cx="140" cy="160" r="4"/></g><g class="ox" fill="#fff" opacity=".7"><circle class="b" cx="130" cy="150" r="3"/><circle class="b" cx="200" cy="160" r="3" style="animation-delay:1s"/><circle class="b" cx="250" cy="140" r="3" style="animation-delay:2s"/></g></g><rect x="290" y="12" width="10" height="40" rx="5" fill="#fff3"/><rect class="th" x="291" y="14" width="8" height="36" rx="4" fill="#ff5a4a" data-name="수온"/><text x="80" y="42">해수면</text></svg>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin:6px 0"><button class="sb a" data-s="1">초기</button><button class="sb" data-s="2">광합성 후</button><button class="sb" data-s="3">후반 빙하기</button></div><p id="oct">초기 바다: 비교적 따뜻하고 산소가 부족, 철이 많이 녹아 있었다.</p></div></div></div>
+
+<div class="card v"><h2>④ 수륙 분포 · 로디니아</h2>
+<div class="row"><svg viewBox="0 0 360 200" data-info="약 10억~7억 년 전 여러 대륙괴가 합쳐져 로디니아 초대륙을 이루었다가 다시 분열. 대륙 이동은 해수면·해류·기후에 영향."><rect width="360" height="200" rx="10" fill="#10346a"/>
+<g fill="#7bc043" stroke="#3b6a1a" stroke-width="2"><path class="k" d="M120 58L170 55L172 95L125 98Z" data-name="대륙괴 A"/><path class="k k2" d="M174 55L226 60L222 98L174 95Z" data-name="대륙괴 B"/><path class="k k3" d="M125 102L172 99L175 142L128 138Z" data-name="대륙괴 C"/><path class="k k4" d="M176 99L222 102L225 140L178 144Z" data-name="대륙괴 D"/></g><text class="rod" x="180" y="30" text-anchor="middle" style="font-weight:700">로디니아 초대륙</text><text x="180" y="190" text-anchor="middle" style="font-size:10px">합쳐짐 → 분열 (반복 재생)</text></svg>
+<div><p>여러 대륙괴가 형성·이동하며 합쳐지거나 분리. 약 10억~7억 년 전 <b>로디니아</b> 초대륙을 이루었다가 다시 분열.</p><p>대륙 이동은 해수면과 해류, 기후 변화에도 영향.</p>
+<svg viewBox="0 0 200 110" style="margin-top:6px" data-info="화산 활동: 초기 지구에서 매우 활발했으며, 맨틀의 열과 지각 형성 과정의 영향을 크게 받았다."><path d="M10 105L80 40L120 40L190 105Z" fill="#6a4a3a" data-name="화산"/><g fill="#ff7a2a"><circle class="lv" cx="100" cy="38" r="4" style="--x:-25px"/><circle class="lv" cx="100" cy="38" r="5" style="--x:0px"/><circle class="lv" cx="100" cy="38" r="4" style="--x:25px"/></g><text x="100" y="12" text-anchor="middle">화산 활동 매우 활발</text></svg>
+<p>초기 지구에서 매우 활발. 맨틀의 열과 지각 형성 과정의 영향.</p></div></div></div>
+</section>
+
+<!-- BIO -->
+<section class="tab" id="bio">
+<div class="card v"><h2>⑤ 대표 동물 · 바다/육지 단면</h2>
+<svg viewBox="0 0 600 210"><rect width="600" height="210" fill="#bfe3ff"/><rect x="0" y="80" width="400" height="130" fill="#2a7bd0"/><path d="M400 150Q430 110 470 108L600 108V210H400Z" fill="#8a6a4a"/><path d="M0 80Q200 70 400 80V92H0Z" fill="#fff4"/><text x="150" y="105" style="fill:#fff">바다</text><text x="520" y="98" style="fill:#2a4a1a;font-weight:700">육지</text>
+<use class="sw" href="#cy" x="40" y="130" width="100" height="40" data-name="남세균 (시아노박테리아)" data-card="c1"/><use class="sw" href="#din" x="190" y="140" width="90" height="54" data-name="에디아카라 동물군" data-card="c3"/><use href="#cha" x="300" y="120" width="40" height="70" data-name="에디아카라 동물군" data-card="c3"/><use href="#ich" x="360" y="102" width="110" height="48" data-name="이크티오스테가 (해양생물로 분류)" data-card="c2"/></svg>
+<p>그림 위의 생물이나 아래 카드를 클릭하세요. <span class="tag s">해양생물</span> <span class="tag l">육상생물</span></p>
+<div class="cards">
+<div class="an sea" id="c1"><svg viewBox="0 0 100 40"><use href="#cy" width="100" height="40"/></svg><b>남세균 / 시아노박테리아</b> <span class="tag s">해양</span><div class="d">(단세포 미생물) 지구 역사상 처음으로 광합성을 하여 산소를 만들어낸 원핵생물.</div></div>
+<div class="an sea" id="c2"><svg viewBox="0 0 140 62"><use href="#ich" width="140" height="62"/></svg><b>이크티오스테가</b> <span class="tag s">해양</span><div class="d">최초의 원시 양서류 중 하나. 아가미 대신 폐를 가지고 있었고, 꼬리에는 여전히 물고기 같은 지느러미가 남아 있었지만, 완전히 발달한 네 다리로 땅 위를 엉금엉금 기어 다닌 생물.</div></div>
+<div class="an sea" id="c3"><svg viewBox="0 0 160 70"><use href="#din" width="100" height="60"/><use href="#cha" x="110" width="40" height="70"/></svg><b>에디아카라 동물군</b> <span class="tag s">해양</span><div class="d">산소 급증이 다세포 생물(에디아카라 동물군)을 탄생시켰습니다. ← 이 동물들이 번성할 수 있었던 이유.</div></div></div></div>
+
+<div class="card v"><button class="rp">▶ 다시</button><h2>⑥ 대표 식물 · 남세균</h2>
+<div class="row"><svg viewBox="0 0 300 190" data-info="남세균이 만든 오존층 덕분에 식물이 최초로 육지에 상륙."><rect width="300" height="190" fill="#2a7bd0"/><g class="sw"><use href="#cy" x="20" y="60" width="130" height="52" data-name="남세균 (대표 식물)"/><use href="#cy" x="120" y="120" width="130" height="52"/></g><g class="b" fill="#fff"><circle cx="60" cy="50" r="4"/></g><g class="b" fill="#fff" style="animation-delay:1.2s"><circle cx="170" cy="100" r="4"/></g><text x="10" y="16" style="fill:#fff">광합성 → O₂ 방출</text></svg>
+<div><p><b>남세균(시아노박테리아)</b> — 대표 식물.</p><svg viewBox="0 0 300 110"><rect width="140" height="110" rx="10" fill="#2a7bd0"/><use href="#cy" x="20" y="35" width="100" height="40"/><text x="70" y="20" text-anchor="middle" style="fill:#fff">선캄브리아</text><text x="70" y="100" text-anchor="middle" style="fill:#fff">바다</text><path d="M148 55H178" stroke="var(--ac)" stroke-width="4" class="pl"/><path d="M172 45L186 55L172 65Z" fill="var(--ac)"/><rect x="160" y="0" width="140" height="110" rx="10" fill="#bfe3ff" opacity="0"/><rect x="190" y="0" width="110" height="110" rx="10" fill="#8a6a4a"/><rect x="190" y="0" width="110" height="26" rx="10" fill="#7a5ac8" class="pl" data-name="오존층"/><text x="245" y="17" text-anchor="middle" style="fill:#fff">오존층</text><g stroke="#4a8a2a" stroke-width="3"><path d="M215 105V70M245 105V60M275 105V75"/></g><text x="245" y="55" text-anchor="middle" style="fill:#fff;font-size:10px">고생대 육지</text></svg>
+<p>선캄브리아 → 고생대: <b>바다에서 육지</b>. 남세균이 만든 오존층 덕분에 식물이 최초로 육지에 상륙.</p></div></div></div>
+</section>
+
+<!-- FOS -->
+<section class="tab" id="fos">
+<div class="card v"><h2>⑦ 표준화석 · 에디아카라 생물군</h2>
+<div class="row"><svg viewBox="0 0 320 240" data-info="에디아카라 생물군은 선캄브리아 시대 말기 지층에서 나옵니다."><rect y="0" width="320" height="50" fill="#9a8a6a" data-name="고생대 지층 (이후 시대)"/><rect y="50" width="320" height="42" fill="#7a6a58"/><rect y="92" width="320" height="50" fill="#d9a066" class="pl" data-name="에디아카라 생물군이 나오는 층"/><rect y="142" width="320" height="46" fill="#6a5a48"/><rect y="188" width="320" height="52" fill="#4a3f38"/>
+<use href="#din" x="30" y="102" width="50" height="30"/><use href="#cha" x="120" y="96" width="24" height="42"/><use href="#din" x="180" y="108" width="40" height="24"/><use href="#cha" x="250" y="98" width="24" height="42"/><text x="8" y="28">고생대 지층(이후)</text><text x="8" y="215">더 오래된 지층</text><text x="160" y="160" text-anchor="middle" style="font-weight:700;fill:#ffb347">▲ 에디아카라 생물군 층 (선캄브리아 말)</text></svg>
+<div><svg viewBox="0 0 200 100"><use class="sw" href="#din" x="10" y="20" width="110" height="66" data-name="에디아카라 화석 (딕킨소니아형)"/><use href="#cha" x="135" y="6" width="50" height="88" data-name="에디아카라 화석 (잎 모양)"/></svg>
+<p><b>에디아카라 생물군</b> — 바다에 처음 등장한 대형 다세포 군집물.</p><p>알 수 있는 것: 지구 생명체 진화 역사에서 가장 수수께끼 같았던 최초의 대형 다세포 생물들의 탄생과 생태계 정보.</p></div></div>
+<h2 style="margin-top:10px">표준화석의 조건 4가지</h2><div class="cond">
+<div><svg viewBox="0 0 30 30" width="30"><circle cx="15" cy="15" r="12" fill="none" stroke="#ffb347" stroke-width="2"/><path d="M15 7V15L21 18" stroke="#ffb347" stroke-width="2" fill="none"/></svg><b>생존 기간이 짧고</b><br>지질학적 시간 단위에서 아주 짧은 기간 동안만 살다가 멸종.</div>
+<div><svg viewBox="0 0 30 30" width="30"><circle cx="15" cy="15" r="12" fill="none" stroke="#ffb347" stroke-width="2"/><path d="M3 15H27M15 3Q8 15 15 27M15 3Q22 15 15 27" stroke="#ffb347" fill="none"/></svg><b>분포 지역 넓음</b><br>전 세계 또는 매우 넓은 지역에 골고루 서식.</div>
+<div><svg viewBox="0 0 30 30" width="30" fill="#ffb347"><circle cx="8" cy="9" r="3"/><circle cx="20" cy="8" r="3"/><circle cx="14" cy="17" r="3"/><circle cx="6" cy="23" r="3"/><circle cx="23" cy="22" r="3"/></svg><b>많은 개체수</b><br>그 시대 생물의 수가 압도적으로 많아 화석으로 쉽게 발견.</div>
+<div><svg viewBox="0 0 30 30" width="30"><path d="M15 3L18 11H27L20 17L23 26L15 21L7 26L10 17L3 11H12Z" fill="#ffb347"/></svg><b>특징이 뚜렷함</b><br>다른 생물들과 외형적으로 쉽게 구분되는 독특한 형태.</div></div></div>
+
+<div class="card v"><button class="rp">▶ 다시</button><h2>⑧ 시대 말 사건 · 생물 종 수 (모식도)</h2>
+<div class="row"><svg viewBox="0 0 360 190" data-info="산소 대폭발 사건: 남세균의 광합성으로 막대한 산소 → 오존층 형성 → 육상 진출 발판."><path d="M30 20V160H340" stroke="var(--mut)" fill="none"/><path class="dr" pathLength="1" d="M30 50L90 45L150 55L240 48L270 150L335 158" fill="none" stroke="#ff5a6a" stroke-width="4" stroke-linejoin="round"/><line x1="255" y1="20" x2="255" y2="160" stroke="var(--ac)" stroke-dasharray="4"/><text x="255" y="14" text-anchor="middle" style="fill:#ffb347">산소 대폭발 사건</text><text x="8" y="14">종 수</text><text x="300" y="176">시대 말 →</text></svg>
+<div><p><b>산소 대폭발 사건</b>: 남세균이 광합성을 시작하면서 막대한 양의 산소를 분출. 그 결과 오존층이 형성된 이후 육상으로 진출할 수 있는 발판이 마련되었습니다.</p><p><b>원인으로 제시되는 요인</b>: 생물학적 진화와 지질학적 변화가 맞물린 복합적인 요인.</p></div></div></div>
+</section>
+</main>
+<footer><b>참고 자료</b><br>대한민국 국가지도집 <a href="http://nationalatlas.ngii.go.kr/pages/page_1222.php">nationalatlas.ngii.go.kr</a><br>Lyons, Reinhard &amp; Planavsky, Nature (2014); Eguchi, Seales &amp; Dasgupta, Nature Geoscience (2020)<br>The Evolution of Plant Physiology (Academic Press), 영국 고생물학회(Palaeontological Association) 연구 자료<br>클래스e 산소혁명 사건, 글로벌 지질학 표준 지침서 <a href="https://www.britannica.com/science/Precambrian">britannica.com/science/Precambrian</a><br><br><b>만든 사람</b>: 1반 1모둠 — 김도현 김시후 조성준 한서율</footer>
+<div id="tip"></div><div id="pop"></div>
+<script>
+const $=(s,r=document)=>[...r.querySelectorAll(s)];
+$('nav button').forEach(b=>b.onclick=()=>{$('nav button,.tab').forEach(e=>e.classList.remove('a'));b.classList.add('a');document.getElementById(b.dataset.t).classList.add('a');scrollTo(0,0)});
+function count(e){const t=+e.dataset.c,d=+e.dataset.d||0,u=e.dataset.u||'';let s=null;(function f(ts){s=s||ts;const p=Math.min((ts-s)/1800,1);e.textContent=(t*p).toFixed(d)+u;if(p<1)requestAnimationFrame(f)})(performance.now())}
+const io=new IntersectionObserver(es=>es.forEach(x=>{x.target.classList.toggle('on',x.isIntersecting)}),{threshold:.25});
+$('.v').forEach(e=>io.observe(e));$('[data-c]').forEach(count);
+$('.rp').forEach(b=>b.onclick=()=>{const v=b.closest('.v');v.classList.remove('on');void v.offsetWidth;v.classList.add('on')});
+const T=['','초기 바다: 비교적 따뜻하고 산소가 부족했으며, 철이 많이 녹아 있었다.','광합성 생물의 등장으로 산소가 증가하고 이산화탄소가 감소하면서 기후가 점차 냉각.','후반: 대규모 빙하기가 발생하여 해수면과 수온이 크게 변동.'];
+$('.sb').forEach(b=>b.onclick=()=>{$('.sb').forEach(x=>x.classList.remove('a'));b.classList.add('a');oc.dataset.s=b.dataset.s;oct.textContent=T[b.dataset.s]});
+const tip=document.getElementById('tip'),pop=document.getElementById('pop');
+document.addEventListener('mousemove',e=>{const n=e.target.closest('[data-name]');if(n){tip.style.display='block';tip.textContent=n.dataset.name;tip.style.left=e.clientX+12+'px';tip.style.top=e.clientY+14+'px'}else tip.style.display='none'});
+document.addEventListener('click',e=>{const c=e.target.closest('[data-card]');if(c){const a=document.getElementById(c.dataset.card);$('.an').forEach(x=>x.classList.remove('open'));a.classList.add('open');a.scrollIntoView({behavior:'smooth',block:'center'});return}
+const a=e.target.closest('.an');if(a){const o=a.classList.contains('open');$('.an').forEach(x=>x.classList.remove('open'));if(!o)a.classList.add('open');return}
+const i=e.target.closest('[data-info]');if(i){pop.textContent=i.dataset.info;pop.style.display='block';return}
+const n=e.target.closest('[data-name]');if(n){pop.textContent=n.dataset.name;pop.style.display='block';return}pop.style.display='none'});
+</script></body></html>
